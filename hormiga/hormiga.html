@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Hormiga</title>
+
+<script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+
+<style>
+*{
+    box-sizing:border-box;
+}
+
+html,body{
+    margin:0;
+    width:100%;
+    height:100%;
+    overflow:hidden;
+    font-family:Arial,Helvetica,sans-serif;
+}
+
+/* FONDO */
+body{
+    background-image:url("fondoHor.jpg");
+    background-size:cover;
+    background-repeat:no-repeat;
+    background-position:center -100px;
+}
+
+/* TITULO */
+.titulo{
+    position:absolute;
+    top:25px;
+    left:25%;
+    transform:translateX(-50%);
+    z-index:100;
+    text-align:center;
+    color:#000;
+}
+
+.titulo-pequeno{
+    font-size:39px;
+    font-weight:900;
+    letter-spacing:8px;
+    margin-bottom:-5px;
+    white-space:nowrap;
+}
+
+.titulo-grande{
+    font-size:100px;
+    font-weight:900;
+    line-height:.9;
+    letter-spacing:-5px;
+    transform:translateX(30px);
+}
+
+/* CONTENIDO */
+.contenido{
+    width:100%;
+    height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding-top:70px;
+    position:relative;
+}
+
+/* MODELO */
+.modelo{
+    width:70%;
+    height:85vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+model-viewer{
+    width:100%;
+    height:100%;
+    background:transparent;
+}
+
+/* CUADRO DE LEYENDA */
+.texto{
+    position:absolute;
+    right:6%;
+    top:50%;
+    transform:translateY(-50%);
+    width:32%;
+    min-height:400px;
+    padding:40px;
+    background:rgba(255,255,255,.35);
+    backdrop-filter:blur(8px);
+    -webkit-backdrop-filter:blur(8px);
+    border:1px solid rgba(255,255,255,.5);
+    border-radius:25px;
+    box-shadow:0 10px 35px rgba(0,0,0,.25);
+    color:#111;
+    display:none;
+    z-index:500;
+}
+
+.texto.mostrar{
+    display:block;
+}
+
+.texto h2{
+    margin-top:0;
+    font-size:32px;
+    font-weight:900;
+}
+
+.texto p{
+    font-size:18px;
+    line-height:1.6;
+    text-align:justify;
+}
+
+/* BOTONES SUPERIORES */
+.botones-superiores{
+    position:absolute;
+    top:25px;
+    right:50px;
+    z-index:1000;
+    display:flex;
+    align-items:center;
+    gap:15px;
+}
+
+/* BOTON LEYENDA */
+.btn-leyenda{
+    padding:12px 30px;
+    background:rgba(255,255,255,.25);
+    backdrop-filter:blur(8px);
+    -webkit-backdrop-filter:blur(8px);
+    border:1px solid rgba(255,255,255,.5);
+    border-radius:25px;
+    color:#111;
+    font-size:18px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.btn-leyenda:hover{
+    background:rgba(255,255,255,.45);
+    transform:scale(1.05);
+}
+
+/* BOTON INICIO */
+.btn-volver{
+    padding:12px 30px;
+    background:rgba(255,255,255,.25);
+    backdrop-filter:blur(8px);
+    -webkit-backdrop-filter:blur(8px);
+    border:1px solid rgba(255,255,255,.5);
+    border-radius:25px;
+    color:#111;
+    font-size:20px;
+    font-weight:bold;
+    text-decoration:none;
+    transition:.3s;
+}
+
+.btn-volver:hover{
+    background:rgba(255,255,255,.45);
+    transform:scale(1.05);
+}
+
+/* CELULAR */
+@media(max-width:800px){
+
+    .titulo{
+        left:50%;
+    }
+
+    .titulo-grande{
+        font-size:55px;
+    }
+
+    .titulo-pequeno{
+        font-size:15px;
+        letter-spacing:5px;
+    }
+
+    .contenido{
+        flex-direction:column;
+        padding-top:120px;
+    }
+
+   .modelo{
+    width:70%;
+    height:85vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.modelo model-viewer{
+    transform:translateX(-450px);
+}
+
+    .texto{
+        width:85%;
+        right:7.5%;
+        top:50%;
+        min-height:auto;
+        padding:25px;
+    }
+
+    .texto h2{
+        font-size:25px;
+    }
+
+    .texto p{
+        font-size:15px;
+    }
+
+    .botones-superiores{
+        top:20px;
+        right:20px;
+        gap:8px;
+    }
+
+    .btn-leyenda,
+    .btn-volver{
+        padding:10px 18px;
+        font-size:16px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- BOTONES -->
+<div class="botones-superiores">
+
+    <button class="btn-leyenda" onclick="mostrarLeyenda()">
+        Leyenda
+    </button>
+
+    <a href="./index.html" class="btn-volver">
+    Inicio
+</a>
+
+</div>
+
+<!-- TITULO -->
+<div class="titulo">
+
+    <div class="titulo-pequeno">
+        LAS 4 PLAGAS
+    </div>
+
+    <div class="titulo-grande">
+        LA HORMIGA
+    </div>
+
+</div>
+
+<!-- CONTENIDO -->
+<div class="contenido">
+
+    <!-- MODELO 3D -->
+    <div class="modelo">
+
+        <model-viewer
+            src="hormiga.glb"
+            alt="Hormiga 3D"
+            camera-controls
+            shadow-intensity="1"
+            exposure="1.4"
+            camera-orbit="0deg 75deg 2m"
+            camera-target="0m 0m 0m"
+            field-of-view="35deg">
+        </model-viewer>
+
+    </div>
+
+    <!-- CUADRO DE LEYENDA -->
+    <div class="texto" id="leyenda">
+
+        <h2>LEYENDA</h2>
+
+        <p>
+            Cuenta la leyenda que Huari envió un enorme ejército de hormigas
+            para destruir al pueblo de los Urus. Las hormigas avanzaron en gran
+            cantidad, amenazando con cubrir la región y acabar con sus habitantes.
+        </p>
+
+        <p>
+            Sin embargo, Ñusta protegió al pueblo y detuvo la terrible plaga,
+            convirtiendo a las hormigas en arena. Desde entonces, forman parte
+            de las cuatro plagas de Oruro y de las antiguas leyendas de la ciudad.
+        </p>
+
+    </div>
+
+</div>
+
+<script>
+
+function mostrarLeyenda(){
+
+    document
+        .getElementById("leyenda")
+        .classList
+        .toggle("mostrar");
+
+}
+
+</script>
+
+</body>
+</html>
