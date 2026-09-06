@@ -2,316 +2,2090 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Hormiga</title>
 
-<script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Las 4 Plagas - La Hormiga</title>
+
+<script
+type="module"
+src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js">
+</script>
 
 <style>
+
+/*RESET*/
 *{
+    margin:0;
+    padding:0;
     box-sizing:border-box;
 }
-
-html,body{
-    margin:0;
+html,
+body{
     width:100%;
     height:100%;
     overflow:hidden;
-    font-family:Arial,Helvetica,sans-serif;
+    font-family:Arial, Helvetica, sans-serif;
 }
-
-/* FONDO */
 body{
-    background-image:url("fondoHor.jpg");
+
+    background-image:
+        linear-gradient(
+            rgba(0,0,0,.15),
+            rgba(0,0,0,.38)
+        ),
+        url("fondoHor.jpg");
+
     background-size:cover;
+    background-position:center;
     background-repeat:no-repeat;
-    background-position:center -100px;
+
+    color:white;
 }
 
-/* TITULO */
-.titulo{
+
+/* =====================================================
+   PÁGINA
+===================================================== */
+
+.pagina{
+    width:100%;
+    height:100vh;
+    position:relative;
+    overflow:hidden;
+}
+
+
+/* =====================================================
+   NAVBAR
+===================================================== */
+
+.navbar{
+
     position:absolute;
-    top:25px;
-    left:25%;
-    transform:translateX(-50%);
-    z-index:100;
-    text-align:center;
-    color:#000;
+    top:0;
+    left:0;
+    width:100%;
+    height:92px;
+    padding:0 42px;
+    display:flex;
+    align-items:center;
+
+    z-index:1000;
+
+    background:
+        linear-gradient(
+            to bottom,
+            rgba(0,0,0,.35),
+            transparent
+        );
+}
+/* LOGO */
+
+.logo{
+
+    display:flex;
+    align-items:center;
+    gap:12px;
+
+    text-decoration:none;
+    color:white;
+
+    min-width:220px;
 }
 
-.titulo-pequeno{
-    font-size:39px;
-    font-weight:900;
-    letter-spacing:8px;
-    margin-bottom:-5px;
+.logo-icon{
+
+    width:43px;
+    height:43px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.7);
+
+    border-radius:50%;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:21px;
+
+    background:
+        rgba(255,255,255,.08);
+
+    backdrop-filter:blur(8px);
+
+    box-shadow:
+        0 0 15px
+        rgba(255,255,255,.08);
+}
+
+.logo-text{
+
+    font-family:Georgia,serif;
+
+    font-size:15px;
+
+    font-weight:bold;
+
+    letter-spacing:1.5px;
+
+    line-height:1.1;
+}
+
+.logo-text span{
+
+    display:block;
+
+    font-family:Arial,sans-serif;
+
+    font-size:9px;
+
+    letter-spacing:3px;
+
+    opacity:.7;
+
+    margin-top:4px;
+}
+
+
+/* =====================================================
+   MENÚ PRINCIPAL
+===================================================== */
+
+.menu{
+
+    margin-left:auto;
+
+    display:flex;
+
+    align-items:center;
+
+    height:100%;
+
+    gap:4px;
+}
+
+.menu-item{
+
+    position:relative;
+
+    height:100%;
+
+    display:flex;
+
+    align-items:center;
+}
+
+.menu-link{
+
+    height:44px;
+
+    padding:0 16px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:7px;
+
+    color:white;
+
+    text-decoration:none;
+
+    font-size:13px;
+
+    font-weight:bold;
+
+    letter-spacing:.5px;
+
+    border-radius:25px;
+
+    transition:.3s;
+
     white-space:nowrap;
 }
 
-.titulo-grande{
-    font-size:100px;
-    font-weight:900;
+.menu-link:hover{
+
+    background:
+        rgba(255,255,255,.13);
+
+    backdrop-filter:blur(8px);
+}
+
+.flecha-menu{
+
+    font-size:10px;
+
+    transition:.3s;
+}
+
+.menu-item:hover .flecha-menu{
+
+    transform:rotate(180deg);
+}
+
+
+/* =====================================================
+   DROPDOWN
+===================================================== */
+
+.dropdown{
+
+    position:absolute;
+
+    top:74px;
+
+    left:50%;
+
+    transform:
+        translateX(-50%)
+        translateY(10px);
+
+    width:230px;
+
+    padding:9px;
+
+    border-radius:18px;
+
+    background:
+        rgba(20,14,8,.90);
+
+    border:
+        1px solid
+        rgba(255,255,255,.22);
+
+    backdrop-filter:blur(18px);
+
+    -webkit-backdrop-filter:blur(18px);
+
+    box-shadow:
+        0 18px 45px
+        rgba(0,0,0,.45);
+
+    opacity:0;
+
+    visibility:hidden;
+
+    transition:.25s ease;
+
+    z-index:2000;
+}
+
+.menu-item:hover .dropdown{
+
+    opacity:1;
+
+    visibility:visible;
+
+    transform:
+        translateX(-50%)
+        translateY(0);
+}
+
+.dropdown::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:-6px;
+    left:50%;
+
+    width:12px;
+    height:12px;
+
+    background:
+        rgba(20,14,8,.90);
+
+    border-left:
+        1px solid
+        rgba(255,255,255,.22);
+
+    border-top:
+        1px solid
+        rgba(255,255,255,.22);
+
+    transform:
+        translateX(-50%)
+        rotate(45deg);
+}
+
+.dropdown a{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    width:100%;
+
+    padding:12px 13px;
+
+    color:white;
+
+    text-decoration:none;
+
+    border-radius:11px;
+
+    font-size:13px;
+
+    transition:.25s;
+}
+
+.dropdown a:hover{
+
+    background:
+        rgba(218,171,89,.18);
+
+    color:#f1c878;
+
+    padding-left:18px;
+}
+
+.dropdown-icon{
+
+    width:28px;
+    height:28px;
+
+    border-radius:50%;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    background:
+        rgba(255,255,255,.08);
+
+    border:
+        1px solid
+        rgba(255,255,255,.15);
+
+    font-size:13px;
+}
+
+
+/* =====================================================
+   BOTONES NAV
+===================================================== */
+
+.btn-galeria{
+
+    border:
+        1px solid
+        rgba(255,255,255,.35);
+}
+
+.btn-contacto{
+
+    background:
+        rgba(190,130,45,.30);
+
+    border:
+        1px solid
+        rgba(230,190,110,.45);
+}
+
+
+/* =====================================================
+   BOTÓN HAMBURGUESA
+===================================================== */
+
+.menu-toggle{
+
+    display:none;
+
+    width:43px;
+    height:43px;
+
+    border-radius:50%;
+
+    border:
+        1px solid
+        rgba(255,255,255,.45);
+
+    background:
+        rgba(0,0,0,.25);
+
+    color:white;
+
+    font-size:22px;
+
+    cursor:pointer;
+
+    align-items:center;
+    justify-content:center;
+}
+
+
+/* =====================================================
+   TÍTULO
+===================================================== */
+
+.titulo{
+
+    position:absolute;
+
+    top:112px;
+
+    left:50%;
+
+    transform:
+        translateX(-50%);
+
+    z-index:50;
+
+    text-align:center;
+
     line-height:.9;
-    letter-spacing:-5px;
-    transform:translateX(30px);
+
+    text-shadow:
+        0 4px 15px
+        rgba(0,0,0,.8);
+
+    pointer-events:none;
 }
 
-/* CONTENIDO */
+.titulo-pequeno{
+
+    font-family:Georgia,serif;
+
+    font-size:22px;
+
+    font-weight:bold;
+
+    letter-spacing:8px;
+
+    margin-bottom:10px;
+}
+
+.titulo-grande{
+
+    font-family:Georgia,serif;
+
+    font-size:66px;
+
+    font-weight:900;
+
+    letter-spacing:3px;
+
+    white-space:nowrap;
+
+    color:white;
+
+    -webkit-text-stroke:
+        1px rgba(0,0,0,.6);
+}
+
+
+/* =====================================================
+   BOTÓN INICIO
+===================================================== */
+
+.btn-inicio{
+
+    position:absolute;
+
+    top:105px;
+    right:38px;
+
+    z-index:100;
+
+    padding:10px 21px;
+
+    border-radius:25px;
+
+    color:white;
+
+    text-decoration:none;
+
+    font-family:Georgia,serif;
+
+    font-size:13px;
+
+    font-weight:bold;
+
+    background:
+        rgba(255,255,255,.10);
+
+    border:
+        1px solid
+        rgba(255,255,255,.45);
+
+    backdrop-filter:blur(10px);
+
+    transition:.3s;
+}
+
+.btn-inicio:hover{
+
+    background:
+        rgba(255,255,255,.25);
+
+    transform:scale(1.05);
+}
+
+
+/* =====================================================
+   CONTENIDO
+===================================================== */
+
 .contenido{
+
+    position:absolute;
+
+    top:95px;
+    left:0;
+
     width:100%;
-    height:100vh;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    padding-top:70px;
-    position:relative;
-}
 
-/* MODELO */
-.modelo{
-    width:70%;
-    height:85vh;
+    height:
+        calc(100vh - 95px);
+
     display:flex;
+
     align-items:center;
+
     justify-content:center;
 }
+/* TEXTO */
 
-model-viewer{
-    width:100%;
-    height:100%;
-    background:transparent;
-}
-
-/* CUADRO DE LEYENDA */
 .texto{
     position:absolute;
-    right:6%;
-    top:50%;
-    transform:translateY(-50%);
-    width:32%;
-    min-height:400px;
-    padding:40px;
-    background:rgba(255,255,255,.35);
-    backdrop-filter:blur(8px);
-    -webkit-backdrop-filter:blur(8px);
-    border:1px solid rgba(255,255,255,.5);
-    border-radius:25px;
-    box-shadow:0 10px 35px rgba(0,0,0,.25);
-    color:#111;
-    display:none;
-    z-index:500;
+    right:7%;
+    top:47%;
+    transform:
+        translateY(-50%);
+    width:38%;
+    min-height:430px;
+    padding:38px 43px;
+    border-radius:28px;
+    background:
+
+        linear-gradient(
+            135deg,
+            rgba(25,18,10,.76),
+            rgba(45,30,15,.48)
+        );
+    border:
+        1px solid
+        rgba(255,255,255,.28);
+
+    backdrop-filter:blur(16px);
+    -webkit-backdrop-filter:blur(16px);
+    box-shadow:
+
+        0 20px 55px
+        rgba(0,0,0,.45),
+
+        inset
+        0 0 30px
+        rgba(255,255,255,.035);
+
+    z-index:30;
 }
 
-.texto.mostrar{
-    display:block;
+.texto::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:-1px;
+    right:35px;
+
+    width:120px;
+
+    height:2px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            #e8b85c
+        );
 }
 
 .texto h2{
-    margin-top:0;
-    font-size:32px;
-    font-weight:900;
+
+    margin:0 0 13px;
+
+    font-family:Georgia,serif;
+
+    font-size:16px;
+
+    letter-spacing:4px;
+
+    color:#e9c276;
 }
+
+.texto h3{
+
+    margin:0;
+
+    font-family:Georgia,serif;
+
+    font-size:47px;
+
+    line-height:.95;
+
+    letter-spacing:-1px;
+
+    font-weight:900;
+
+    text-shadow:
+        0 4px 12px
+        rgba(0,0,0,.4);
+}
+
+
+/* =====================================================
+   DECORACIÓN
+===================================================== */
+
+.decoracion{
+
+    width:100%;
+    height:1px;
+
+    background:
+        rgba(255,255,255,.35);
+
+    margin:22px 0;
+
+    position:relative;
+}
+
+.decoracion span{
+
+    position:absolute;
+
+    left:50%;
+    top:50%;
+
+    width:11px;
+    height:11px;
+
+    transform:
+        translate(-50%,-50%)
+        rotate(45deg);
+
+    background:#704b22;
+
+    border:
+        1px solid
+        #e7bd68;
+}
+
+
+/* =====================================================
+   PÁRRAFOS
+===================================================== */
 
 .texto p{
-    font-size:18px;
-    line-height:1.6;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size:15px;
+
+    line-height:1.55;
+
     text-align:justify;
+
+    color:
+        rgba(255,255,255,.92);
+
+    margin-bottom:13px;
 }
 
-/* BOTONES SUPERIORES */
-.botones-superiores{
-    position:absolute;
-    top:25px;
-    right:50px;
-    z-index:1000;
-    display:flex;
-    align-items:center;
-    gap:15px;
-}
 
-/* BOTON LEYENDA */
+/* =====================================================
+   BOTÓN DESCUBRIR
+===================================================== */
+
 .btn-leyenda{
-    padding:12px 30px;
-    background:rgba(255,255,255,.25);
-    backdrop-filter:blur(8px);
-    -webkit-backdrop-filter:blur(8px);
-    border:1px solid rgba(255,255,255,.5);
-    border-radius:25px;
-    color:#111;
-    font-size:18px;
+
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:14px;
+
+    padding:11px 21px;
+
+    border-radius:30px;
+
+    color:white;
+
+    text-decoration:none;
+
+    font-family:Georgia,serif;
+
+    font-size:13px;
+
     font-weight:bold;
-    cursor:pointer;
+
+    background:
+
+        linear-gradient(
+            90deg,
+            rgba(190,130,45,.85),
+            rgba(110,70,20,.60)
+        );
+
+    border:
+        1px solid
+        rgba(255,220,150,.65);
+
     transition:.3s;
 }
 
 .btn-leyenda:hover{
-    background:rgba(255,255,255,.45);
-    transform:scale(1.05);
+
+    transform:
+        translateY(-3px);
+
+    box-shadow:
+        0 0 25px
+        rgba(235,180,80,.6);
+}
+.btn-leyenda span{
+
+    font-size:19px;
+    transition:.3s;
+}
+.btn-leyenda:hover span{
+
+    transform:
+        translateX(5px);
 }
 
-/* BOTON INICIO */
-.btn-volver{
-    padding:12px 30px;
-    background:rgba(255,255,255,.25);
-    backdrop-filter:blur(8px);
-    -webkit-backdrop-filter:blur(8px);
-    border:1px solid rgba(255,255,255,.5);
-    border-radius:25px;
-    color:#111;
-    font-size:20px;
-    font-weight:bold;
-    text-decoration:none;
+/* MODELO 3D */
+
+.modelo{
+    position:absolute;
+    left:1%;
+    top:40%;
+    transform:
+        translateY(-50%);
+    width:56%;
+    height:76vh;
+    z-index:10;
+    filter:
+        drop-shadow(
+            0 30px 25px
+            rgba(0,0,0,.55)
+        );
+}
+
+.modelo::before{
+
+    content:"";
+    position:absolute;
+    width:65%;
+    height:50%;
+    left:17%;
+    bottom:8%;
+
+    background:
+        radial-gradient(
+            ellipse,
+            rgba(220,170,80,.20),
+            transparent 70%
+        );
+
+    filter:blur(40px);
+
+    pointer-events:none;
+}
+
+model-viewer{
+
+    width:100%;
+    height:100%;
+
+    background:transparent;
+
+    --poster-color:transparent;
+}
+
+
+/* =====================================================
+   INDICADORES
+===================================================== */
+
+.indicadores{
+
+    position:absolute;
+
+    right:30px;
+
+    top:52%;
+
+    transform:
+        translateY(-50%);
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:17px;
+
+    z-index:100;
+}
+
+.indicador{
+
+    width:15px;
+    height:15px;
+
+    border-radius:50%;
+
+    border:
+        1px solid
+        rgba(255,255,255,.8);
+
+    background:transparent;
+
     transition:.3s;
 }
 
-.btn-volver:hover{
-    background:rgba(255,255,255,.45);
-    transform:scale(1.05);
+.indicador:hover{
+
+    background:white;
+
+    transform:scale(1.2);
 }
 
-/* CELULAR */
-@media(max-width:800px){
+.indicador.activo{
 
-    .titulo{
-        left:50%;
+    background:white;
+
+    box-shadow:
+        0 0 15px white;
+
+    transform:scale(1.25);
+}
+
+
+/* =====================================================
+   INTERACCIÓN
+===================================================== */
+
+.interaccion{
+
+    position:absolute;
+
+    bottom:63px;
+
+    left:48%;
+
+    transform:
+        translateX(-50%);
+
+    z-index:80;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    padding:9px 21px;
+
+    border-radius:30px;
+
+    background:
+        rgba(15,10,5,.55);
+
+    border:
+        1px solid
+        rgba(255,255,255,.25);
+
+    backdrop-filter:blur(10px);
+
+    font-family:Georgia,serif;
+
+    font-size:13px;
+
+    white-space:nowrap;
+}
+
+
+/* =====================================================
+   MOUSE
+===================================================== */
+
+.mouse{
+
+    width:19px;
+    height:27px;
+
+    border:
+        2px solid white;
+
+    border-radius:10px;
+
+    position:relative;
+}
+
+.mouse::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:3px;
+    height:7px;
+
+    background:white;
+
+    border-radius:5px;
+
+    top:5px;
+    left:50%;
+
+    transform:
+        translateX(-50%);
+
+    animation:
+        mouseMove 1.5s infinite;
+}
+
+@keyframes mouseMove{
+
+    0%{
+        transform:
+            translate(-50%,0);
+        opacity:1;
+    }
+
+    100%{
+        transform:
+            translate(-50%,8px);
+        opacity:0;
+    }
+}
+
+
+/* =====================================================
+   FLECHAS
+===================================================== */
+
+.flechas{
+
+    position:absolute;
+
+    bottom:63px;
+
+    left:4%;
+
+    z-index:100;
+
+    display:flex;
+
+    gap:12px;
+}
+
+.flecha{
+
+    width:46px;
+    height:46px;
+
+    border-radius:50%;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    color:white;
+
+    background:
+        rgba(20,12,5,.55);
+
+    border:
+        1px solid
+        rgba(255,255,255,.5);
+
+    font-size:23px;
+
+    cursor:pointer;
+
+    transition:.3s;
+}
+
+.flecha:hover{
+
+    transform:scale(1.08);
+
+    color:#e9c276;
+
+    border-color:#e9c276;
+
+    box-shadow:
+        0 0 20px
+        rgba(230,180,90,.4);
+}
+
+
+/* =====================================================
+   BARRA INFERIOR
+===================================================== */
+
+.info-bar{
+
+    position:absolute;
+
+    bottom:14px;
+
+    left:3%;
+
+    width:94%;
+
+    height:42px;
+
+    border-radius:12px;
+
+    background:
+        rgba(20,12,5,.58);
+
+    border:
+        1px solid
+        rgba(255,255,255,.25);
+
+    backdrop-filter:blur(12px);
+
+    display:flex;
+
+    align-items:center;
+
+    z-index:90;
+}
+
+.info{
+
+    flex:1;
+
+    height:70%;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    padding:0 25px;
+
+    border-right:
+        1px solid
+        rgba(255,255,255,.16);
+}
+
+.info:last-child{
+    border-right:none;
+}
+
+.info-icon{
+    font-size:20px;
+}
+
+.info-text{
+
+    font-family:Georgia,serif;
+
+    font-size:10px;
+}
+
+.info-text span{
+
+    display:block;
+
+    font-size:8px;
+
+    opacity:.6;
+
+    margin-top:2px;
+}
+
+
+/* =====================================================
+   MENÚ MÓVIL
+===================================================== */
+
+.menu-movil{
+
+    position:fixed;
+
+    top:0;
+
+    right:-100%;
+
+    width:300px;
+
+    height:100vh;
+
+    z-index:5000;
+
+    padding:
+        90px 25px 30px;
+
+    background:
+        rgba(17,12,7,.96);
+
+    backdrop-filter:blur(20px);
+
+    border-left:
+        1px solid
+        rgba(255,255,255,.18);
+
+    box-shadow:
+        -15px 0 45px
+        rgba(0,0,0,.5);
+
+    transition:
+        right .35s ease;
+
+    overflow-y:auto;
+}
+
+.menu-movil.abierto{
+    right:0;
+}
+
+.cerrar-menu{
+
+    position:absolute;
+
+    top:25px;
+    right:20px;
+
+    width:40px;
+    height:40px;
+
+    border-radius:50%;
+
+    background:
+        rgba(255,255,255,.08);
+
+    border:
+        1px solid
+        rgba(255,255,255,.25);
+
+    color:white;
+
+    font-size:20px;
+
+    cursor:pointer;
+}
+
+.movil-titulo{
+
+    font-family:Georgia,serif;
+
+    color:#e9c276;
+
+    font-size:13px;
+
+    letter-spacing:3px;
+
+    margin-bottom:20px;
+}
+
+.movil-link{
+
+    display:block;
+
+    padding:14px 8px;
+
+    color:white;
+
+    text-decoration:none;
+
+    border-bottom:
+        1px solid
+        rgba(255,255,255,.10);
+
+    font-size:14px;
+}
+
+.movil-link:hover{
+    color:#e9c276;
+}
+
+.movil-submenu{
+
+    display:none;
+
+    padding-left:15px;
+}
+
+.movil-submenu.abierto{
+    display:block;
+}
+
+.movil-submenu a{
+
+    display:block;
+
+    color:
+        rgba(255,255,255,.75);
+
+    text-decoration:none;
+
+    padding:11px 5px;
+
+    font-size:13px;
+}
+
+.movil-submenu a:hover{
+    color:#e9c276;
+}
+
+.movil-dropdown{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    cursor:pointer;
+}
+
+
+/* =====================================================
+   OVERLAY
+===================================================== */
+
+.overlay{
+
+    position:fixed;
+
+    inset:0;
+
+    background:
+        rgba(0,0,0,.45);
+
+    z-index:4000;
+
+    opacity:0;
+
+    visibility:hidden;
+
+    transition:.3s;
+}
+
+.overlay.activo{
+
+    opacity:1;
+
+    visibility:visible;
+}
+
+
+/* =====================================================
+   TABLET
+===================================================== */
+
+@media(max-width:1200px){
+
+    .navbar{
+        padding:0 25px;
+    }
+
+    .menu-link{
+        padding:0 10px;
+        font-size:11px;
+    }
+
+    .logo{
+        min-width:190px;
     }
 
     .titulo-grande{
         font-size:55px;
     }
 
-    .titulo-pequeno{
-        font-size:15px;
-        letter-spacing:5px;
+    .texto{
+
+        right:5%;
+
+        width:42%;
     }
+
+    .modelo{
+
+        width:57%;
+
+        left:-4%;
+    }
+
+}
+
+
+/* =====================================================
+   CELULAR
+===================================================== */
+
+@media(max-width:800px){
+
+    html,
+    body{
+
+        overflow-y:auto;
+        overflow-x:hidden;
+    }
+
+    .pagina{
+
+        min-height:100vh;
+
+        height:auto;
+
+        overflow:hidden;
+    }
+
+    .navbar{
+
+        height:75px;
+
+        padding:0 18px;
+
+        justify-content:space-between;
+    }
+
+    .logo{
+        min-width:auto;
+    }
+
+    .logo-icon{
+
+        width:36px;
+        height:36px;
+
+        font-size:17px;
+    }
+
+    .logo-text{
+        font-size:12px;
+    }
+    .logo-text span{
+        font-size:8px;
+    }
+    .menu{
+        display:none;
+    }
+    .menu-toggle{
+        display:flex;
+    }
+    /* TÍTULO */
+    .titulo{
+        top:92px;
+        width:100%;
+    }
+    .titulo-pequeno{
+        font-size:13px;
+        letter-spacing:4px;
+        margin-bottom:7px;
+    }
+    .titulo-grande{
+
+        font-size:40px;
+
+        letter-spacing:0;
+    }
+
+    .btn-inicio{
+        display:none;
+    }
+
+
+    /* CONTENIDO */
 
     .contenido{
+
+        position:relative;
+
+        top:auto;
+
+        height:auto;
+
+        min-height:100vh;
+
+        padding-top:150px;
+
+        display:flex;
+
         flex-direction:column;
-        padding-top:120px;
     }
 
-   .modelo{
-    width:70%;
-    height:85vh;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-}
 
-.modelo model-viewer{
-    transform:translateX(-450px);
-}
+    /* MODELO */
+
+    .modelo{
+
+        position:relative;
+
+        top:auto;
+
+        left:auto;
+
+        transform:none;
+
+        width:100%;
+
+        height:43vh;
+
+        order:1;
+    }
+
+
+    /* TEXTO */
 
     .texto{
-        width:85%;
-        right:7.5%;
-        top:50%;
+
+        position:relative;
+
+        top:auto;
+
+        right:auto;
+
+        transform:none;
+
+        width:90%;
+
         min-height:auto;
-        padding:25px;
-    }
 
+        margin:
+            10px auto 100px;
+        padding:
+            28px 25px;
+        order:2;
+    }
     .texto h2{
-        font-size:25px;
+        font-size:14px;
     }
-
+    .texto h3{
+        font-size:39px;
+    }
     .texto p{
-        font-size:15px;
+        font-size:14px;
+        line-height:1.55;
+    }
+    .indicadores{
+        display:none;
+    }
+    .interaccion{
+        bottom:58px;
+        left:50%;
+        font-size:10px;
+        padding:8px 13px;
     }
 
-    .botones-superiores{
-        top:20px;
+
+    .flechas{
+
+        bottom:15px;
+        left:auto;
         right:20px;
-        gap:8px;
     }
-
-    .btn-leyenda,
-    .btn-volver{
-        padding:10px 18px;
-        font-size:16px;
+    .flecha{
+        width:40px;
+        height:40px;
+        font-size:20px;
+    }
+    .info-bar{
+        display:none;
     }
 }
+
 </style>
 </head>
-
 <body>
+<div class="pagina">
 
-<!-- BOTONES -->
-<div class="botones-superiores">
+<!-- ===================================================
+     NAVBAR
+=================================================== -->
 
-    <button class="btn-leyenda" onclick="mostrarLeyenda()">
-        Leyenda
+<header class="navbar">
+ <!-- LOGO -->
+<div class="logo">
+    <div class="logo-icon">
+        ✦
+    </div>
+    <div class="logo-text">
+        LAS 4 PLAGAS
+        <span>
+            ORURO · BOLIVIA
+        </span>
+    </div>
+</div>
+
+    <!-- MENÚ DESKTOP -->
+    <nav class="menu">
+        <div class="menu-item">
+    <a
+        href="https://ariananina.github.io/paginavirgen/"
+        class="menu-link">
+        INICIO
+    </a>
+</div>
+
+        <!-- LAS 4 PLAGAS -->
+
+        <div class="menu-item">
+            <a
+                href="#"
+                class="menu-link">
+
+                LAS 4 PLAGAS
+                <span class="flecha-menu">
+                    ▼
+                </span>
+            </a>
+            <div class="dropdown">
+                <a href="./hormiga.html">
+
+                    <span class="dropdown-icon">
+                        🐜
+                    </span>
+                    La Hormiga
+                </a>
+                <a href="./serpi/serpi.html">
+
+                    <span class="dropdown-icon">
+                        🐍
+                    </span>
+
+                    La Serpiente
+
+                </a>
+
+
+                <a href="./sapo.html">
+
+                    <span class="dropdown-icon">
+                        🐸
+                    </span>
+
+                    El Sapo
+
+                </a>
+
+
+                <a href="./lagarto.html">
+
+                    <span class="dropdown-icon">
+                        🦎
+                    </span>
+                    El Lagarto
+
+                </a>
+            </div>
+        </div>
+
+
+
+        <!-- GALERÍA -->
+
+        <div class="menu-item">
+            <a
+                href="#galeria"
+                class="menu-link btn-galeria">
+
+                GALERÍA
+            </a>
+        </div>
+    </nav>
+
+
+    <!-- HAMBURGUESA -->
+    <button
+        class="menu-toggle"
+        id="abrirMenu">
+
+        ☰
+    </button>
+</header>
+
+<!-- ===================================================
+     MENÚ MÓVIL
+=================================================== -->
+
+<div
+    class="overlay"
+    id="overlay">
+</div>
+
+
+<aside
+    class="menu-movil"
+    id="menuMovil">
+
+
+    <button
+        class="cerrar-menu"
+        id="cerrarMenu">
+
+        ×
+
     </button>
 
-    <a href="https://ariananina.github.io/paginavirgen/" class="btn-volver">
-    Inicio
+
+    <div class="movil-titulo">
+
+        NAVEGACIÓN
+
+    </div>
+
+<a
+    href="https://ariananina.github.io/paginavirgen/"
+    class="movil-link">
+    INICIO
 </a>
 
-</div>
 
-<!-- TITULO -->
-<div class="titulo">
+    <!-- PLAGAS -->
 
-    <div class="titulo-pequeno">
-        LAS 4 PLAGAS
+    <div
+        class="movil-link movil-dropdown"
+        data-submenu="plagas">
+
+        <span>
+            LAS 4 PLAGAS
+        </span>
+
+        <span>
+            ▼
+        </span>
+
     </div>
 
-    <div class="titulo-grande">
-        LA HORMIGA
+
+    <div
+        class="movil-submenu"
+        id="plagas">
+
+
+        <a href="./hormiga.html">
+            🐜 La Hormiga
+        </a>
+
+
+        <a href="./serpi/serpi.html">
+            🐍 La Serpiente
+        </a>
+
+
+        <a href="./sapo.html">
+            🐸 El Sapo
+        </a>
+
+
+        <a href="./lagarto.html">
+            🦎 El Lagarto
+        </a>
+
+
     </div>
+
+
+    <!-- LEYENDA -->
+
+    <div
+        class="movil-link movil-dropdown"
+        data-submenu="leyenda">
+
+        <span>
+            LA LEYENDA
+        </span>
+
+        <span>
+            ▼
+        </span>
+
+    </div>
+
+
+    <div
+        class="movil-submenu"
+        id="leyenda">
+
+
+        <a href="./index.html">
+            📜 Historia
+        </a>
+
+
+        <a href="#virgen">
+            ✨ Virgen del Socavón
+        </a>
+
+
+        <a href="#huari">
+            ⚔ Huari
+        </a>
+
+
+        <a href="#nusta">
+            👑 Ñusta
+        </a>
+
+
+    </div>
+
+
+    <!-- CULTURA -->
+
+    <div
+        class="movil-link movil-dropdown"
+        data-submenu="cultura">
+
+        <span>
+            CULTURA DE ORURO
+        </span>
+
+        <span>
+            ▼
+        </span>
+
+    </div>
+
+
+    <div
+        class="movil-submenu"
+        id="cultura">
+
+
+        <a href="#carnaval">
+            🎭 Carnaval de Oruro
+        </a>
+
+
+        <a href="#diablada">
+            👹 La Diablada
+        </a>
+
+        <a href="#tradiciones">
+            ✦ Tradiciones
+        </a>
+
+    </div>
+    <a
+        href="#galeria"
+        class="movil-link">
+
+        GALERÍA
+
+    </a>
+  
+</aside>
+
+<!-- INDICADORES -->
+<div class="indicadores">
+    <a
+        href="./hormiga.html"
+        class="indicador activo">
+    </a>
+    <a
+        href="./serpi/serpi.html"
+        class="indicador">
+    </a>
+
+
+    <a
+        href="./sapo.html"
+        class="indicador">
+    </a>
+
+
+    <a
+        href="./lagarto.html"
+        class="indicador">
+    </a>
+
 
 </div>
 
-<!-- CONTENIDO -->
-<div class="contenido">
 
+
+<!-- ===================================================
+     CONTENIDO
+=================================================== -->
+
+<main class="contenido">
+
+
+    <!-- TEXTO -->
+
+    <section class="texto">
+
+
+        <h2>
+            LEYENDA
+        </h2>
+
+
+        <h3>
+            LA HORMIGA
+        </h3>
+
+
+        <div class="decoracion">
+
+            <span></span>
+
+        </div>
+
+
+        <p>
+
+            Cuenta la leyenda que Huari, enfurecido
+            contra el pueblo de los Urus, decidió
+            enviar enormes plagas para destruirlos.
+
+        </p>
+
+
+        <p>
+
+            Entre ellas apareció una gigantesca
+            hormiga que avanzaba por la región
+            causando destrucción y sembrando
+            temor entre sus habitantes.
+        </p>
+        <p>
+            Sin embargo, Ñusta protegió al pueblo
+            y logró detener a las criaturas enviadas
+            por Huari, convirtiéndolas en piedra.
+
+        </p>
+
+    </section>
     <!-- MODELO 3D -->
-    <div class="modelo">
 
+    <div class="modelo">
         <model-viewer
             src="hormiga.glb"
             alt="Hormiga 3D"
             camera-controls
-            shadow-intensity="1"
-            exposure="1.4"
-            camera-orbit="0deg 75deg 2m"
+            auto-rotate
+            shadow-intensity="1.2"
+            shadow-softness="1"
+            exposure="1.35"
+            environment-image="neutral"
+            camera-orbit="0deg 75deg 2.5m"
             camera-target="0m 0m 0m"
             field-of-view="35deg">
+
         </model-viewer>
+    </div>
+</main>
+
+<!-- ===================================================
+     BARRA INFERIOR
+=================================================== -->
+
+<div class="info-bar">
+    <div class="info">
+        <div class="info-icon">
+            ✦
+        </div>
+        <div class="info-text">
+            LEYENDA ANCESTRAL
+            <span>
+                Historia y Tradicion
+            </span>
+        </div>
+    </div>
+
+    <div class="info">
+        <div class="info-icon">
+            ◈
+        </div>
+        <div class="info-text">
+            PARTE DE LAS 4 PLAGAS
+
+            <span>
+                Patrimonio de Oruro
+            </span>
+        </div>
+    </div>
+
+
+    <div class="info">
+        <div class="info-icon">
+            ✧
+        </div>
+
+        <div class="info-text">
+            SIMBOLO DE PROTECCION 
+            <span>
+                Defensor del Pueblo
+            </span>
+        </div>
+    </div>
+
+    <div class="info">
+
+        <div class="info-icon">
+            ◉
+        </div>
+        <div class="info-text">
+
+            CULTURA VIVA 
+
+            <span>
+                Orgullo Orureño
+            </span>
+
+        </div>
 
     </div>
 
-    <!-- CUADRO DE LEYENDA -->
-    <div class="texto" id="leyenda">
-
-        <h2>LEYENDA</h2>
-
-        <p>
-            Cuenta la leyenda que Huari envió un enorme ejército de hormigas
-            para destruir al pueblo de los Urus. Las hormigas avanzaron en gran
-            cantidad, amenazando con cubrir la región y acabar con sus habitantes.
-        </p>
-
-        <p>
-            Sin embargo, Ñusta protegió al pueblo y detuvo la terrible plaga,
-            convirtiendo a las hormigas en arena. Desde entonces, forman parte
-            de las cuatro plagas de Oruro y de las antiguas leyendas de la ciudad.
-        </p>
-
-    </div>
 
 </div>
 
+
+
+</div>
+
+
+
+<!-- ===================================================
+     JAVASCRIPT MENÚ
+=================================================== -->
+
 <script>
 
-function mostrarLeyenda(){
 
-    document
-        .getElementById("leyenda")
-        .classList
-        .toggle("mostrar");
+/* ================================================
+   ELEMENTOS
+================================================ */
+
+const abrirMenu =
+    document.getElementById("abrirMenu");
+
+const cerrarMenu =
+    document.getElementById("cerrarMenu");
+
+const menuMovil =
+    document.getElementById("menuMovil");
+
+const overlay =
+    document.getElementById("overlay");
+
+
+/* ================================================
+   ABRIR
+================================================ */
+
+abrirMenu.addEventListener(
+    "click",
+    function(){
+
+        menuMovil.classList.add("abierto");
+
+        overlay.classList.add("activo");
+
+    }
+);
+
+
+/* ================================================
+   CERRAR
+================================================ */
+
+function cerrar(){
+
+    menuMovil.classList.remove("abierto");
+
+    overlay.classList.remove("activo");
 
 }
 
+
+cerrarMenu.addEventListener(
+    "click",
+    cerrar
+);
+
+
+overlay.addEventListener(
+    "click",
+    cerrar
+);
+
+
+/* ================================================
+   SUBMENÚS
+================================================ */
+
+const botonesSubmenu =
+    document.querySelectorAll(
+        ".movil-dropdown"
+    );
+
+
+botonesSubmenu.forEach(
+    boton => {
+
+        boton.addEventListener(
+            "click",
+            function(){
+
+                const id =
+                    this.dataset.submenu;
+
+                const submenu =
+                    document.getElementById(id);
+
+
+                submenu.classList.toggle(
+                    "abierto"
+                );
+
+            }
+        );
+
+    }
+);
+
+
+/* ================================================
+   CERRAR AL NAVEGAR
+================================================ */
+
+const enlacesMovil =
+    document.querySelectorAll(
+        ".movil-submenu a, .menu-movil > .movil-link:not(.movil-dropdown)"
+    );
+
+
+enlacesMovil.forEach(
+    enlace => {
+
+        enlace.addEventListener(
+            "click",
+            cerrar
+        );
+
+    }
+);
+
+
 </script>
 
+
 </body>
+
 </html>
