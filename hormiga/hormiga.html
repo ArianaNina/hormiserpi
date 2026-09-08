@@ -711,21 +711,13 @@ body{
 ===================================================== */
 
 .btn-leyenda{
-
     display:inline-flex;
-
     align-items:center;
-
     gap:14px;
-
     padding:11px 21px;
-
     border-radius:30px;
-
     color:white;
-
     text-decoration:none;
-
     font-family:Georgia,serif;
 
     font-size:13px;
@@ -1540,58 +1532,7 @@ model-viewer{
     </a>
 </div>
 
-        <!-- LAS 4 PLAGAS -->
-
-        <div class="menu-item">
-            <a
-                href="#"
-                class="menu-link">
-
-                LAS 4 PLAGAS
-                <span class="flecha-menu">
-                    ▼
-                </span>
-            </a>
-            <div class="dropdown">
-                <a href="./hormiga.html">
-
-                    <span class="dropdown-icon">
-                        🐜
-                    </span>
-                    La Hormiga
-                </a>
-                <a href="./serpi/serpi.html">
-
-                    <span class="dropdown-icon">
-                        🐍
-                    </span>
-
-                    La Serpiente
-
-                </a>
-
-
-                <a href="./sapo.html">
-
-                    <span class="dropdown-icon">
-                        🐸
-                    </span>
-
-                    El Sapo
-
-                </a>
-
-
-                <a href="./lagarto.html">
-
-                    <span class="dropdown-icon">
-                        🦎
-                    </span>
-                    El Lagarto
-
-                </a>
-            </div>
-        </div>
+        <!-- GALERÍA -->
 
 
 
@@ -1653,50 +1594,7 @@ model-viewer{
     INICIO
 </a>
 
-
-    <!-- PLAGAS -->
-
-    <div
-        class="movil-link movil-dropdown"
-        data-submenu="plagas">
-
-        <span>
-            LAS 4 PLAGAS
-        </span>
-
-        <span>
-            ▼
-        </span>
-
-    </div>
-
-
-    <div
-        class="movil-submenu"
-        id="plagas">
-
-
-        <a href="./hormiga.html">
-            🐜 La Hormiga
-        </a>
-
-
-        <a href="./serpi/serpi.html">
-            🐍 La Serpiente
-        </a>
-
-
-        <a href="./sapo.html">
-            🐸 El Sapo
-        </a>
-
-
-        <a href="./lagarto.html">
-            🦎 El Lagarto
-        </a>
-
-
-    </div>
+    <!-- LEYENDA -->
 
 
     <!-- LEYENDA -->
@@ -1716,33 +1614,7 @@ model-viewer{
     </div>
 
 
-    <div
-        class="movil-submenu"
-        id="leyenda">
-
-
-        <a href="./index.html">
-            📜 Historia
-        </a>
-
-
-        <a href="#virgen">
-            ✨ Virgen del Socavón
-        </a>
-
-
-        <a href="#huari">
-            ⚔ Huari
-        </a>
-
-
-        <a href="#nusta">
-            👑 Ñusta
-        </a>
-
-
-    </div>
-
+  
 
     <!-- CULTURA -->
 
@@ -1793,11 +1665,11 @@ model-viewer{
 <!-- INDICADORES -->
 <div class="indicadores">
     <a
-        href="./hormiga.html"
+        href="https://ariananina.github.io/hormiserpi/hormiga/hormiga.html"
         class="indicador activo">
     </a>
     <a
-        href="./serpi/serpi.html"
+        href="https://ariananina.github.io/hormiserpi/serpi/serpi.html"
         class="indicador">
     </a>
 
@@ -2004,15 +1876,10 @@ abrirMenu.addEventListener(
 /* ================================================
    CERRAR
 ================================================ */
-
 function cerrar(){
-
     menuMovil.classList.remove("abierto");
-
     overlay.classList.remove("activo");
-
 }
-
 
 cerrarMenu.addEventListener(
     "click",
@@ -2024,8 +1891,6 @@ overlay.addEventListener(
     "click",
     cerrar
 );
-
-
 /* ================================================
    SUBMENÚS
 ================================================ */
