@@ -377,7 +377,7 @@ body{
 
     border:
         1px solid
-        rgba(255,255,255,.35);
+        rgba(13, 12, 12, 0.35);
 }
 
 .btn-contacto{
@@ -1498,7 +1498,53 @@ model-viewer{
         display:none;
     }
 }
+.galeria-modal{
+    display:none;
+    position:fixed;
+    inset:0;
+    z-index:6000;
+    background:rgba(0,0,0,.90);
+    align-items:center;
+    justify-content:center;
+    flex-direction:column;
+}
 
+.galeria-modal.activo{
+    display:flex;
+}
+
+.galeria-modal h2{
+    color:white;
+    margin-bottom:25px;
+    font-family:Georgia,serif;
+    letter-spacing:3px;
+}
+
+.galeria-imagenes{
+    display:flex;
+    gap:25px;
+}
+
+.galeria-imagenes img{
+    width:380px;
+    height:250px;
+    object-fit:cover;
+    border-radius:15px;
+}
+
+.cerrar-galeria{
+    position:absolute;
+    top:25px;
+    right:35px;
+    background:none;
+    border:none;
+    color:white;
+    font-size:40px;
+    cursor:pointer;
+}
+.btn-galeria{
+    color:#000 !important;
+}
 </style>
 </head>
 <body>
@@ -1534,20 +1580,25 @@ model-viewer{
 
         <!-- GALERÍA -->
 
-
-
-        <!-- GALERÍA -->
-
         <div class="menu-item">
-            <a
-                href="#galeria"
-                class="menu-link btn-galeria">
+           <button class="menu-link btn-galeria" id="abrirGaleria">
+        GALERÍA
+        </button>
 
-                GALERÍA
-            </a>
         </div>
     </nav>
+<div class="galeria-modal" id="galeriaModal">
 
+    <button class="cerrar-galeria" id="cerrarGaleria">×</button>
+
+    <h2>GALERÍA · LA HORMIGA</h2>
+
+    <div class="galeria-imagenes">
+        <img src="h1.jpg" alt="La Hormiga">
+        <img src="h2.jpg" alt="La Hormiga">
+    </div>
+
+</div>
 
     <!-- HAMBURGUESA -->
     <button
@@ -1595,10 +1646,6 @@ model-viewer{
 </a>
 
     <!-- LEYENDA -->
-
-
-    <!-- LEYENDA -->
-
     <div
         class="movil-link movil-dropdown"
         data-submenu="leyenda">
@@ -1708,7 +1755,7 @@ model-viewer{
 
 
         <h3>
-            LA HORMIGA
+            DE LA HORMIGA
         </h3>
 
 
@@ -1762,6 +1809,7 @@ model-viewer{
         </model-viewer>
     </div>
 </main>
+
 
 <!-- ===================================================
      BARRA INFERIOR
@@ -1946,7 +1994,17 @@ enlacesMovil.forEach(
 
     }
 );
+const abrirGaleria = document.getElementById("abrirGaleria");
+const cerrarGaleria = document.getElementById("cerrarGaleria");
+const galeriaModal = document.getElementById("galeriaModal");
 
+abrirGaleria.addEventListener("click", function(){
+    galeriaModal.classList.add("activo");
+});
+
+cerrarGaleria.addEventListener("click", function(){
+    galeriaModal.classList.remove("activo");
+});
 
 </script>
 
