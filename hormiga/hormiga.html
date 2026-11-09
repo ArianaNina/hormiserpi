@@ -765,38 +765,22 @@ body{
     position:absolute;
     left:1%;
     top:40%;
-    transform:
-        translateY(-50%);
+    transform:translateY(-50%);
     width:56%;
     height:76vh;
     z-index:10;
-    filter:
-        drop-shadow(
-            0 30px 25px
-            rgba(0,0,0,.55)
-        );
+
+/* CONTORNO BLANCO CON BRILLO */
+
+filter:
+    drop-shadow(2px 0 0 #ffffff)
+    drop-shadow(-2px 0 0 #ffffff)
+    drop-shadow(0 2px 0 #ffffff)
+    drop-shadow(0 -2px 0 #ffffff)
+    drop-shadow(0 0 5px rgba(255,255,255,1));
 }
 
-.modelo::before{
 
-    content:"";
-    position:absolute;
-    width:65%;
-    height:50%;
-    left:17%;
-    bottom:8%;
-
-    background:
-        radial-gradient(
-            ellipse,
-            rgba(220,170,80,.20),
-            transparent 70%
-        );
-
-    filter:blur(40px);
-
-    pointer-events:none;
-}
 
 model-viewer{
 
@@ -1598,7 +1582,7 @@ model-viewer{
         <img src="h2.jpg" alt="La Hormiga">
         
     </div>
-    <p>
+            <p>
            “Fuente: Fotografias Propias”
             </p>
 </div>
@@ -1804,8 +1788,9 @@ model-viewer{
             alt="Hormiga 3D"
             camera-controls
             auto-rotate
-            shadow-intensity="1.2"
-            shadow-softness="1"
+             rotation-per-second="45deg"
+            shadow-intensity="0"
+            shadow-softness="0"
             exposure="1.35"
             environment-image="neutral"
             camera-orbit="0deg 75deg 2.5m"
