@@ -551,30 +551,17 @@ body{
     width:56%;
     height:76vh;
     z-index:10;
-    filter:
-        drop-shadow(
-            0 30px 25px
-            rgba(0,0,0,.55)
-        );
-}
-.modelo::before{
-    content:"";
-    position:absolute;
-    width:65%;
-    height:50%;
-    left:17%;
-    bottom:8%;
+        /* POSTPROCESAMIENTO BLANCO MUY BRILLANTE */
 
-    background:
-        radial-gradient(
-            ellipse,
-            rgba(220,170,80,.20),
-            transparent 70%
-        );
-    filter:
-        blur(40px);
-    pointer-events:none;
+filter:
+    drop-shadow(2px 0 0 #ffffff)
+    drop-shadow(-2px 0 0 #ffffff)
+    drop-shadow(0 2px 0 #ffffff)
+    drop-shadow(0 -2px 0 #ffffff)
+    drop-shadow(0 0 4px rgba(255,255,255,1))
+    drop-shadow(0 0 8px rgba(255,255,255,0.9));
 }
+
 model-viewer{
     width:100%;
     height:100%;
@@ -1290,12 +1277,12 @@ model-viewer{
 
 
         <h2>
-            LEYENDA
+            LEYENDA DE LA 
         </h2>
 
 
         <h3>
-           DE LA SERPIENTE
+           SERPIENTE
         </h3>
 
 
@@ -1336,8 +1323,9 @@ model-viewer{
             alt="Serpiente 3D"
             camera-controls
             auto-rotate
-            shadow-intensity="1.2"
-            shadow-softness="1"
+            rotation-per-second="45deg"
+            shadow-intensity="0"
+            shadow-softness="0"
             exposure="1.35"
             environment-image="neutral"
             camera-orbit="0deg 75deg 2.5m"
